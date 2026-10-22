@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpendSmart - Expense Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="#">
+      <span class="brand-icon">₹</span>
+      <span>SpendSmart</span>
+    </a>
+    <button id="clearAllBtn" class="button danger">Clear All</button>
+  </header>
+
+  <main class="container">
+
+    <section class="summary-grid">
+      <article class="panel metric">
+        <p>Spent this month</p>
+        <h2 id="spentThisMonth">₹0.00</h2>
+      </article>
+
+      <article class="panel metric">
+        <p>Expenses this month</p>
+        <h2 id="expenseCount">0</h2>
+      </article>
+
+      <article class="panel metric">
+        <p>Remaining budget</p>
+        <h2 id="remainingBudget">—</h2>
+      </article>
+
+      <article class="panel budget-panel">
+        <h2>Monthly budget</h2>
+        <form id="budgetForm">
+          <label for="budgetAmount">Amount (₹)</label>
+          <div class="budget-controls">
+            <input id="budgetAmount" type="number"
+              min="0" step="0.01" placeholder="e.g. 25000">
+            <button class="button primary" type="submit">Save</button>
+          </div>
+          <p id="budgetMessage"></p>
+        </form>
+      </article>
+    </section>
+
+    <div class="exchange-row">
+      <span id="usdStatus">USD view: Loading exchange rate...</span>
+      <button id="refreshRateBtn" class="button small" type="button">
+        Refresh rate
+      </button>
+      <span id="usdRate"></span>
+    </div>
+
+    <section class="panel add-panel">
+      <h2>Add expense</h2>
+
+      <form id="expenseForm" class="expense-form">
+        <div class="field name-field">
+          <label for="expenseName">Name</label>
+          <input id="expenseName" type="text"
+            placeholder="e.g. Lunch with team" required>
+        </div>
+
+        <div class="field">
+          <label for="expenseAmount">Amount (₹)</label>
+          <input id="expenseAmount" type="number"
+            min="0.01" step="0.01" placeholder="0.00" required>
+        </div>
+
+        <div class="field">
+          <label for="expenseCategory">Category</label>
+          <select id="expenseCategory" required>
+            <option value="">Select...</option>
+            <option>Food</option>
+            <option>Travel</option>
+            <option>Shopping</option>
+            <option>Bills</option>
+            <option>Health</option>
+            <option>Education</option>
+            <option>Entertainment</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="expenseDate">Date</label>
+          <input id="expenseDate" type="date" required>
+        </div>
+
+        <button class="button primary add-button" type="submit">
+          Add expense
+        </button>
+      </form>
+
+      <p id="expenseMessage"></p>
+    </section>
+
+    <section class="panel expenses-panel">
+      <div class="section-heading">
+        <h2>Expenses</h2>
+        <span id="resultCount"></span>
+      </div>
+
+      <div class="filters">
+        <input id="searchInput" type="search"
+          placeholder="Search by name...">
+
+        <select id="categoryFilter">
+          <option value="">All categories</option>
+          <option>Food</option>
+          <option>Travel</option>
+          <option>Shopping</option>
+          <option>Bills</option>
+          <option>Health</option>
+          <option>Education</option>
+          <option>Entertainment</option>
+          <option>Other</option>
+        </select>
+
+        <select id="sortSelect">
+          <option value="date-desc">Date: newest first</option>
+          <option value="date-asc">Date: oldest first</option>
+          <option value="amount-desc">Amount: highest first</option>
+          <option value="amount-asc">Amount: lowest first</option>
+          <option value="name-asc">Name: A–Z</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th class="amount-cell">Amount</th>
+              <th class="actions-cell">Action</th>
+            </tr>
+          </thead>
+          <tbody id="expenseTableBody"></tbody>
+        </table>
+      </div>
+
+      <div id="emptyState" class="empty-state">
+        <span class="empty-icon">₹</span>
+        <h3>No expenses yet</h3>
+        <p>Add your first expense above.</p>
+      </div>
+
+      <div class="table-footer">
+        <span id="tableTotal">Total: ₹0.00</span>
+        <button id="exportBtn" class="button secondary" type="button">
+          Export CSV
+        </button>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+  <script src="currency.js"></script>
+</body>
+</html>
