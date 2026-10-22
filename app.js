@@ -262,7 +262,7 @@ $("clearAllBtn").addEventListener("click", () => {
 $("exportBtn").addEventListener("click", () => {
   const rows = [
     ["Date", "Name", "Category", "Amount (INR)"],
-    getFilteredExpenses().map(item => [
+    ...getFilteredExpenses().map(item => [
       item.date,
       item.name,
       item.category,
